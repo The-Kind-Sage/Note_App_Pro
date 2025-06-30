@@ -4,29 +4,66 @@ import os
 
 def create_file():
     c_file = str(input("Enter the file name you want to create: "))
-    your_note= str(input("Write your note: \n"))
-    with open('note.txt','w') as newfile:
-        newfile.write(your_note)
+    your_note= input("Write your note: \n")
+    while True:
+        file_location = input("Enter the location where you want to save this file: ")
+        if os.path.exists(file_location):
+            full_path = os.path.join(file_location, c_file)
+            with open(full_path,'w') as newfile:
+                newfile.write(your_note)
+            print(f"Note saved at {full_path}")
+            break
+        else:
+            print("Location does not exist, Please Try Again")
+            
 
-def display_file():
-    with open('note.txt','r') as newfile:
-        print(newfile.read())
+# def create_file():
+#     c_file = input("Enter the file name you want to create: ")
+#     your_note = input("Write your note: \n")
+#     while True:
+#         file_location = input("Enter the location where you want to save this file: ")
+#         if os.path.exists(file_location):
+#             full_path = os.path.join(file_location, c_file)
+#             with open(full_path, 'w') as newfile:
+#                 newfile.write(your_note)
+#             print(f"Note saved at {full_path}")
+#             break
+#         else:
+#             print("Location does not exist, Please Try Again")
+
+    
+        
 
 
 def update_file():
-    updated_note= str(input("Your New list\n"))
-    with open('note.txt','a') as newfile:
-        newfile.write(" "+updated_note)
+    u_file_location = (input("Enter the location where your file exist: "))
+    if os.path.exists(u_file_location):
+        u_file = (input("Enter the file name you want to update: "))
+        if os.path.exists(u_file):
+                updated_note= str(input("Your New Note: \n"))
+                with open(u_file,'a') as newfile:
+                    newfile.write(" "+updated_note)
+        else:
+             print("File name does not exist, Please Try Again")
+    
+    else:
+         print("Location does not exist, Please Try Again")
+
+
+def display_file():
+    with open(c_file,'r') as newfile:
+        print(newfile.read())
+
 
 
 def delete_file():
     del_file = str(input("Enter your file name: "))
-    if del_file == create_file
-    try:
-        os.remove('note.txt')
-        print("Your file has been deleted")
-    except  FileNotFoundError: 
-        print("Your file does not exists")
+    if del_file == create_file:
+        try:
+            os.remove(del_file)
+            print("Your file has been deleted")
+        except  FileNotFoundError: 
+            print("Your file does not exists")
 
 
 
